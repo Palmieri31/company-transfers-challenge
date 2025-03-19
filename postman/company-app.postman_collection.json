@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "fb9d112a-5fab-4c95-a250-e0152063dc86",
+		"name": "company-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12965061"
+	},
+	"item": [
+		{
+			"name": "company",
+			"item": [
+				{
+					"name": "/companies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cuit\": \"23595448345\",\r\n  \"businessName\": \"emp\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_path}}/companies",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/new-affiliates",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_path}}/companies/new-affiliates?limit=2&offset=0",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"companies",
+								"new-affiliates"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/companies-with-transfers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_path}}/companies/companies-with-transfers?limit=10&offset=0",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"companies",
+								"companies-with-transfers"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transfer",
+			"item": [
+				{
+					"name": "/transfers",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"companyId\": 2,\r\n  \"amount\": 100,\r\n  \"debitAccount\": \"1234567890\",\r\n  \"creditAccount\": \"0987654321\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_path}}/transfers",
+							"host": [
+								"{{base_path}}"
+							],
+							"path": [
+								"transfers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
