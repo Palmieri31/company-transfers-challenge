@@ -1,17 +1,21 @@
 import { Company } from '@/domains/company';
-import { CompanyWithTransfersDto } from '@/application/dto/company-with-transfers.dto';
-import { PaginatedResponse } from '@/application/dto/pagination-response.dto';
+import { CompanyEntity } from '@/infrastructure/database/entities/company.entity';
 
 export abstract class CompanyRepository {
-  abstract getNewAffiliates(
+  abstract getNewAffiliatesRaw(
+    dateLimit: Date,
     limit: number,
     offset: number,
-  ): Promise<{ data: Company[]; total: number; limit: number; offset: number }>;
+  ): Promise<{ companies: CompanyEntity[]; total: number }>;
   abstract createCompany(company: Company): Promise<Company>;
-  abstract getCompaniesWithTransfersLastMonth(
-    limit: number,
-    offset: number,
-  ): Promise<PaginatedResponse<CompanyWithTransfersDto>>;
   abstract findById(id: number): Promise<Company>;
   abstract findByCuit(cuit: string): Promise<Company>;
+  abstract getCompaniesWithTransfersLastMonthRaw(
+    dateLimit: Date,
+  ): Promise<{ companyIds: number[] }>;
+  abstract getCompaniesByIds(
+    companyIds: number[],
+    limit: number,
+    offset: number,
+  ): Promise<CompanyEntity[]>;
 }

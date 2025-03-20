@@ -15,6 +15,27 @@ export class GetNewAffiliatesService {
     limit: number;
     offset: number;
   }> {
-    return this.companyRepository.getNewAffiliates(limit, offset);
+    const dateLimit = new Date();
+    dateLimit.setMonth(dateLimit.getMonth() - 1);
+    dateLimit.setUTCHours(0, 0, 0, 0);
+
+    const { companies, total } =
+      await this.companyRepository.getNewAffiliatesRaw(
+        dateLimit,
+        limit,
+        offset,
+      );
+
+    const data = companies.map(
+      (company) =>
+        new Company(
+          company.id,
+          company.cuit,
+          company.businessName,
+          company.adhesionDate,
+        ),
+    );
+
+    return { data, total, limit, offset };
   }
 }

@@ -5,6 +5,7 @@ import {
   IsNotEmpty,
   IsNumber,
   MaxLength,
+  Min,
 } from 'class-validator';
 
 export class CreateTransferDto {
@@ -19,6 +20,7 @@ export class CreateTransferDto {
     { message: 'Amount must be a valid number with up to 2 decimal places' },
   )
   @IsNotEmpty()
+  @Min(1, { message: 'Amount must be greater than or equal to 1' })
   amount: number;
 
   @ApiProperty()
